@@ -68,6 +68,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "wagtail_editable_help.middleware.EditableHelpMiddleware",
 ]
 
 ROOT_URLCONF = "wagtail_editable_help.test.urls"
