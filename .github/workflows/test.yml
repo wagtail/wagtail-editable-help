@@ -43,15 +43,17 @@ jobs:
           - python: '3.8'
             django: '3.2'
             wagtail: '2.16'
-            postgres: '10.8'
+            postgres: '11'
           - python: '3.10'
             django: '4.1'
             wagtail: '4.0'
-            postgres: '10.8'
+            postgres: '12'
 
     services:
       postgres:
         image: postgres:${{ matrix.postgres }}
+        env:
+          POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
