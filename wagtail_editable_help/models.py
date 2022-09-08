@@ -16,11 +16,15 @@ class HelpTextString(models.Model):
         ordering = ("identifier",)
 
 
+_help_text_objects = set()
+
+
 @deconstructible
 class HelpText:
     def __init__(self, identifier, default=""):
         self.identifier = identifier
         self.default = default
+        _help_text_objects.add(self)
 
     def __str__(self):
         str, created = HelpTextString.objects.get_or_create(
@@ -28,5 +32,17 @@ class HelpText:
         )
         return str.text
 
+    def __hash__(self):
+        return hash(self.identifier)
+
     def __eq__(self, other):
         return isinstance(other, HelpText) and other.identifier == self.identifier
+
+
+def populate_help_text_strings():
+    """
+    Ensure that a HelpTextString record exists in the database for all HelpText
+    definitions that have been encountered during module loading
+    """
+    for item in _help_text_objects:
+        str(item)
