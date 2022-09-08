@@ -1,5 +1,10 @@
 from django.db import models
 from django.utils.deconstruct import deconstructible
+from django.utils.html import format_html
+from django.utils.translation import gettext as _
+from wagtail.admin.admin_url_finder import AdminURLFinder
+
+from .middleware import get_active_user
 
 
 class HelpTextString(models.Model):
@@ -39,7 +44,14 @@ class HelpText:
             model_label=self.model_label, identifier=self.identifier,
             defaults={'text': self.default}
         )
-        return str.text
+        user = get_active_user()
+        if user:
+            finder = AdminURLFinder(user)
+            edit_url = finder.get_edit_url(str)
+        if user and edit_url:
+            return format_html('{} (<a href="{}">{}</a>)', str.text, edit_url, _("Edit"))
+        else:
+            return str.text
 
     def __hash__(self):
         return hash((self.model_label, self.identifier))
