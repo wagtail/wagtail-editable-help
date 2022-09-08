@@ -44,3 +44,13 @@ class TestAdmin(TestCase):
         self.assertContains(response, "Write something clickbaity here")
 
         self.assertEqual(HelpTextString.objects.count(), 1)
+
+    def test_help_text_strings_index(self):
+        self.client.login(username="admin", password="password")
+        response = self.client.get("/admin/wagtail_editable_help/helptextstring/")
+        self.assertEqual(response.status_code, 200)
+
+        # The listing should contain all defined HelpTextString records,
+        # even if we never triggered their creation by visiting a view that rendered them
+        self.assertContains(response, "Home page tagline")
+        self.assertContains(response, "Write something snappy here")
