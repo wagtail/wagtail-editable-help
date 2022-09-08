@@ -13,7 +13,7 @@ from wagtail_editable_help.models import HelpText
 
 
 class HomePage(Page):
-    tagline = models.CharField(max_length=255, help_text=HelpText("Home page tagline", default="Write something snappy here"))
+    tagline = models.CharField(max_length=255, help_text=HelpText("Home page", "tagline", default="Write something snappy here"))
 
     content_panels = Page.content_panels + [
         FieldPanel("tagline"),

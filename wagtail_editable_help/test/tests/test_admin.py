@@ -31,7 +31,7 @@ class TestAdmin(TestCase):
 
     def test_get_alternative_text(self):
         HelpTextString.objects.create(
-            identifier="Home page tagline", text="Write something clickbaity here"
+            model_label="Home page", identifier="tagline", text="Write something clickbaity here"
         )
         self.client.login(username="admin", password="password")
         response = self.client.get(
@@ -52,5 +52,6 @@ class TestAdmin(TestCase):
 
         # The listing should contain all defined HelpTextString records,
         # even if we never triggered their creation by visiting a view that rendered them
-        self.assertContains(response, "Home page tagline")
+        self.assertContains(response, "Home page")
+        self.assertContains(response, "tagline")
         self.assertContains(response, "Write something snappy here")
