@@ -11,15 +11,18 @@ on:
 jobs:
   test-sqlite:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         include:
           - python: '3.7'
             django: '3.0'
             wagtail: '2.15'
+            experimental: false
           - python: '3.9'
             django: '4.0'
             wagtail: '3.0'
+            experimental: false
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python }}
@@ -37,6 +40,7 @@ jobs:
 
   test-postgres:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         include:
@@ -44,10 +48,17 @@ jobs:
             django: '3.2'
             wagtail: '2.16'
             postgres: '11'
+            experimental: false
           - python: '3.10'
             django: '4.1'
             wagtail: '4.0'
             postgres: '12'
+            experimental: false
+          - python: '3.10'
+            django: '4.1'
+            wagtail: 'main'
+            postgres: '12'
+            experimental: true
 
     services:
       postgres:
