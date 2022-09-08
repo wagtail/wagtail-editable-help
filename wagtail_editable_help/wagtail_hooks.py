@@ -11,7 +11,7 @@ class HelpTextAdmin(ModelAdmin):
     menu_label = "Help text"
     menu_icon = "help"
     add_to_settings_menu = True
-    list_display = ('identifier', 'text')
+    list_display = ('model_label', 'identifier', 'text')
 
     def get_queryset(self, request):
         # On first call to any ModelAdmin view that retrieves the queryset,

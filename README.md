@@ -34,7 +34,7 @@ For any `help_text` argument that you wish to make editable:
 
     from wagtail_editable_help import HelpText
 
-then replace `help_text="Some help text"` with `help_text=HelpText("identifier", default="Some help text")`. For example:
+then replace `help_text="Some help text"` with `help_text=HelpText("model", "identifier", default="Some help text")`. For example:
 
     class HomePage(Page):
         tagline = models.CharField(max_length=255, help_text="Write something snappy here")
@@ -44,6 +44,6 @@ could be rewritten to:
     from wagtail_editable_help.models import HelpText
 
     class HomePage(Page):
-        tagline = models.CharField(max_length=255, help_text=HelpText("Home page tagline", default="Write something snappy here"))
+        tagline = models.CharField(max_length=255, help_text=HelpText("Home page", "tagline", default="Write something snappy here"))
 
 The help text string will then be made available for editing within the Wagtail admin under Settings -> Help text, under the heading "Home page tagline".
