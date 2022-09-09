@@ -8,7 +8,7 @@ class HelpTextString(models.Model):
     text = models.TextField(blank=True)
 
     def __str__(self):
-        return self.identifier
+        return "%s - %s" % (self.identifier, self.model_label)
 
     def __repr__(self):
         return "<HelpText: %s %s=%r>" % (self.model_label, self.identifier, self.text)
