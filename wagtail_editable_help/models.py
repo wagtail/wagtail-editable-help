@@ -2,7 +2,13 @@ from django.db import models
 from django.utils.deconstruct import deconstructible
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
+from telepath import StringAdapter
 from wagtail.admin.admin_url_finder import AdminURLFinder
+
+try:
+    from wagtail.telepath import register
+except ImportError:
+    from wagtail.core.telepath import register
 
 from .middleware import get_active_user
 
@@ -74,3 +80,11 @@ def populate_help_text_strings():
     """
     for item in _help_text_objects:
         str(item)
+
+
+class HelpTextAdapter(StringAdapter):
+    def build_node(self, obj, context):
+        return super().build_node(str(obj), context)
+
+
+register(HelpTextAdapter(), HelpText)
