@@ -49,7 +49,10 @@ class HelpText:
             finder = AdminURLFinder(user)
             edit_url = finder.get_edit_url(str)
         if user and edit_url:
-            return format_html('{} (<a href="{}">{}</a>)', str.text, edit_url, _("Edit"))
+            if str.text:
+                return format_html('{} <a href="{}" class="edit-help-text">{}</a>', str.text, edit_url, _("Edit"))
+            else:
+                return format_html('<a href="{}" class="add-help-text">{}</a>', edit_url, _("Add help text"))
         else:
             return str.text
 

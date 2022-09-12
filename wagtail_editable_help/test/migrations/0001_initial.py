@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
                 ('tagline', models.CharField(help_text=wagtail_editable_help.models.HelpText('Home page', 'tagline', default='Write something snappy here'), max_length=255)),
+                ('body', models.TextField(blank=True, help_text=wagtail_editable_help.models.HelpText('Home page', 'body'))),
             ],
             options={
                 'abstract': False,

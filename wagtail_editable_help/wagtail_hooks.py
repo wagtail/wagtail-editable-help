@@ -1,3 +1,11 @@
+from django.utils.html import format_html
+from django.templatetags.static import static
+
+try:
+    from wagtail import hooks
+except ImportError:
+    from wagtail.core import hooks
+
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, modeladmin_register)
 from .models import HelpTextString, populate_help_text_strings
@@ -28,3 +36,8 @@ class HelpTextAdmin(ModelAdmin):
 
 
 modeladmin_register(HelpTextAdmin)
+
+
+@hooks.register("insert_global_admin_css")
+def editable_help_css():
+    return format_html('<link rel="stylesheet" href="{}">', static('wagtail_editable_help/wagtail_editable_help.css'))
