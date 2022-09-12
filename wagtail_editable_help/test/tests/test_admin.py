@@ -28,11 +28,11 @@ class TestAdmin(TestCase):
         # with no pre-existing HelpTextString record, the default text should be shown
         self.assertContains(response, "Write something snappy here")
 
-        # a new HelpTextString record now exists
-        self.assertEqual(HelpTextString.objects.count(), 1)
+        # a new HelpTextString record now exists for each field
+        self.assertEqual(HelpTextString.objects.count(), 2)
 
     def test_get_alternative_text(self):
-        help_text = HelpTextString.objects.create(
+        tagline_help_text = HelpTextString.objects.create(
             model_label="Home page", identifier="tagline", text="Write something clickbaity here"
         )
         self.client.login(username="admin", password="password")
@@ -45,13 +45,17 @@ class TestAdmin(TestCase):
         self.assertNotContains(response, "Write something snappy here")
         self.assertContains(response, "Write something clickbaity here")
 
-        # superuser should get the Edit link
-        self.assertContains(response, '(<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/">Edit</a>)' % help_text.id)
+        body_help_text = HelpTextString.objects.get(model_label="Home page", identifier="body")
 
-        self.assertEqual(HelpTextString.objects.count(), 1)
+        # superuser should get the Edit link
+        self.assertContains(response, '<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/" class="edit-help-text">Edit</a>' % tagline_help_text.id)
+        # and an Add link
+        self.assertContains(response, '<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/" class="add-help-text">Add help text</a>' % body_help_text.id)
+
+        self.assertEqual(HelpTextString.objects.count(), 2)
 
     def test_get_alternative_text_as_normal_user(self):
-        help_text = HelpTextString.objects.create(
+        tagline_help_text = HelpTextString.objects.create(
             model_label="Home page", identifier="tagline", text="Write something clickbaity here"
         )
         self.client.login(username="ed", password="password")
@@ -64,10 +68,13 @@ class TestAdmin(TestCase):
         self.assertNotContains(response, "Write something snappy here")
         self.assertContains(response, "Write something clickbaity here")
 
-        # normal user without edit permission on HelpTextString should not get the Edit link
-        self.assertNotContains(response, '(<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/">Edit</a>)' % help_text.id)
+        body_help_text = HelpTextString.objects.get(model_label="Home page", identifier="body")
 
-        self.assertEqual(HelpTextString.objects.count(), 1)
+        # normal user without edit permission on HelpTextString should not get the Edit/Add link
+        self.assertNotContains(response, '<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/" class="edit-help-text">Edit</a>' % tagline_help_text.id)
+        self.assertNotContains(response, '<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/" class="add-help-text">Add help text</a>' % body_help_text.id)
+
+        self.assertEqual(HelpTextString.objects.count(), 2)
 
     def test_help_text_strings_index(self):
         self.client.login(username="admin", password="password")
