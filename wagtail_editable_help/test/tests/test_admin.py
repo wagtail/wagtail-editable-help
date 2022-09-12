@@ -28,8 +28,11 @@ class TestAdmin(TestCase):
         # with no pre-existing HelpTextString record, the default text should be shown
         self.assertContains(response, "Write something snappy here")
 
+        # help text on StreamField blocks should also be present
+        self.assertContains(response, "Choose up to 5 links")
+
         # a new HelpTextString record now exists for each field
-        self.assertEqual(HelpTextString.objects.count(), 2)
+        self.assertEqual(HelpTextString.objects.count(), 3)
 
     def test_get_alternative_text(self):
         tagline_help_text = HelpTextString.objects.create(
@@ -52,7 +55,10 @@ class TestAdmin(TestCase):
         # and an Add link
         self.assertContains(response, '<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/" class="add-help-text">Add help text</a>' % body_help_text.id)
 
-        self.assertEqual(HelpTextString.objects.count(), 2)
+        # help text on StreamField blocks should also be present
+        self.assertContains(response, "Choose up to 5 links")
+
+        self.assertEqual(HelpTextString.objects.count(), 3)
 
     def test_get_alternative_text_as_normal_user(self):
         tagline_help_text = HelpTextString.objects.create(
@@ -74,7 +80,10 @@ class TestAdmin(TestCase):
         self.assertNotContains(response, '<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/" class="edit-help-text">Edit</a>' % tagline_help_text.id)
         self.assertNotContains(response, '<a href="/admin/wagtail_editable_help/helptextstring/edit/%d/" class="add-help-text">Add help text</a>' % body_help_text.id)
 
-        self.assertEqual(HelpTextString.objects.count(), 2)
+        # help text on StreamField blocks should also be present
+        self.assertContains(response, "Choose up to 5 links")
+
+        self.assertEqual(HelpTextString.objects.count(), 3)
 
     def test_help_text_strings_index(self):
         self.client.login(username="admin", password="password")
