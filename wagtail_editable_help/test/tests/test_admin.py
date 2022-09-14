@@ -95,7 +95,3 @@ class TestAdmin(TestCase):
         self.assertContains(response, "Home page")
         self.assertContains(response, "tagline")
         self.assertContains(response, "Write something snappy here")
-
-    def test_fail(self):
-        # deliberate test failure to check nightly test schedule
-        self.assertEqual(1, 2)
