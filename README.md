@@ -33,7 +33,7 @@ Make help text editable in the Wagtail admin
 
 For any `help_text` argument that you wish to make editable:
 
-    from wagtail_editable_help import HelpText
+    from wagtail_editable_help.models import HelpText
 
 then replace `help_text="Some help text"` with `help_text=HelpText("model", "identifier", default="Some help text")`. For example:
 
