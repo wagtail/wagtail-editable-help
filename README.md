@@ -35,7 +35,9 @@ For any `help_text` argument that you wish to make editable:
 
     from wagtail_editable_help.models import HelpText
 
-then replace `help_text="Some help text"` with `help_text=HelpText("model", "identifier", default="Some help text")`. For example:
+then replace `help_text="Some help text"` with `help_text=HelpText("model", "identifier", default="Some help text")`. The model and identifier strings serve as a unique identifer for the help text string and to organise the strings in the admin interface - they do not need to exactly match the model or field name. `HelpText` is valid within any definition that supports help text strings, not just model fields - such as form fields and StreamField blocks.
+
+For example:
 
     class HomePage(Page):
         tagline = models.CharField(max_length=255, help_text="Write something snappy here")
