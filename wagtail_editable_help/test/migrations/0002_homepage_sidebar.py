@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='homepage',
             name='sidebar',
-            field=wagtail_fields.StreamField([('link', wagtail_blocks.PageChooserBlock(help_text=wagtail_editable_help.models.HelpText('Home page', 'sidebar link', default='Choose up to 5 links')))], default=''),
+            field=wagtail_fields.StreamField([('link', wagtail_blocks.PageChooserBlock(help_text=wagtail_editable_help.models.HelpText('Home page', 'sidebar link', default='Choose up to 5 links')))], default='', use_json_field=True),
             preserve_default=False,
         ),
     ]
