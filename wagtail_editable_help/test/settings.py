@@ -160,3 +160,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "test-media")
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Wagtail Editable Help test site"
+WAGTAILADMIN_BASE_URL = "https://example.com"
