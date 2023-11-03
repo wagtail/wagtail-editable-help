@@ -1,17 +1,8 @@
 from django.db import models
-try:
-    from wagtail import blocks
-    from wagtail.fields import StreamField
-    from wagtail.models import Page
-except ImportError:
-    from wagtail.core import blocks
-    from wagtail.core.fields import StreamField
-    from wagtail.core.models import Page
-
-try:
-    from wagtail.admin.panels import FieldPanel
-except ImportError:
-    from wagtail.admin.edit_handlers import FieldPanel
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel
+from wagtail.fields import StreamField
+from wagtail.models import Page
 
 from wagtail_editable_help.models import HelpText
 
