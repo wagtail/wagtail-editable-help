@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/stable/ref/settings/
 
 import os
 import dj_database_url
+from wagtail import VERSION as WAGTAIL_VERSION
 
 # Build paths inside the project like this: os.path.join(PROJECT_DIR, ...)
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail.api.v2",
-    "wagtail.contrib.modeladmin",
     "wagtail.contrib.routable_page",
     "wagtail.contrib.styleguide",
     "wagtail.sites",
@@ -58,6 +58,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
 ]
+
+if WAGTAIL_VERSION < (5, 2):
+    INSTALLED_APPS.append("wagtail.contrib.modeladmin")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
