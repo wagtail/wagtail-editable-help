@@ -1,10 +1,7 @@
 from django.contrib.auth.models import Group, User
 from django.test import TestCase
 
-try:
-    from wagtail.models import Page
-except ImportError:
-    from wagtail.core.models import Page
+from wagtail.models import Page
 
 from wagtail_editable_help.models import HelpTextString
 
