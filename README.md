@@ -26,7 +26,6 @@ Make help text editable in the Wagtail admin
 
 - Run `pip install wagtail-editable-help`
 - Add `"wagtail_editable_help"` to INSTALLED_APPS
-- For Wagtail 5.1 and below: add `"wagtail.contrib.modeladmin"` to INSTALLED_APPS if not already present
 - Run `./manage.py migrate`
 - Optional: add `"wagtail_editable_help.middleware.EditableHelpMiddleware"` to the MIDDLEWARE setting, somewhere below `"django.contrib.auth.middleware.AuthenticationMiddleware"`. Enabling this middleware will add an "Edit" link at the point the help text is shown, to allow superusers and other users with the appropriate permission to edit the help text.
 
