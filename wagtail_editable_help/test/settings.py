@@ -115,6 +115,9 @@ DATABASES = {
     "default": dj_database_url.config(default="sqlite:///test_wagtail_editable_help.db"),
 }
 
+if "postgres" in DATABASES["default"]["ENGINE"]:
+    INSTALLED_APPS.append("django.contrib.postgres")
+
 
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
