@@ -5,17 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.0] - YYYY-MM-DD
+## [0.3.0] - 2026-06-05
 
 ### Added
 
-- Added support for Wagtail 7.0 - 7.4
+- Added support for Wagtail 7.0 - 7.4 and provisionally 8.0
 - Added support for Django 5.2 - 6.0
 - Added support for Python 3.13 - 3.14
-
-### Changed
-
-- ...
 
 ### Removed
 
