@@ -18,9 +18,9 @@ Make help text editable in the Wagtail admin
 
 ## Supported versions
 
-- Python 3.8 - 3.14
-- Django 3.2 - 6.0
-- Wagtail 4.1 - 7.4
+- Python 3.10 - 3.14
+- Django 5.2 - 6.0
+- Wagtail 7.0 - 7.4
 
 ## Installation
 
