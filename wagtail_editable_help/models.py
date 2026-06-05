@@ -5,7 +5,10 @@ from django.utils.translation import gettext as _
 from telepath import StringAdapter
 from wagtail.admin.admin_url_finder import AdminURLFinder
 
-from wagtail.telepath import register
+try:
+    from wagtail.admin.telepath import register
+except ImportError:  # Wagtail <7.1
+    from wagtail.telepath import register
 
 from .middleware import get_active_user
 
